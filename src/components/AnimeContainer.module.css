@@ -1,0 +1,37 @@
+.card_container {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 75%;
+    margin: 0;
+    padding: 0;
+}
+
+.anime_container {
+    color: #ed9e5a;
+}
+
+.container_title {
+    margin: 0 ;
+}
+
+.anime_top_section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 1160px) {
+    .card_container {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .card_container {
+        justify-content: center;
+    }
+}
