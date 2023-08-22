@@ -1,4 +1,4 @@
-import { ANIME_URL } from "@/utils/constants";
+import { ANIME_URL, BASE_URL } from "@/utils/constants";
 
 export default function useAnime() {
     const API = {
@@ -9,7 +9,7 @@ export default function useAnime() {
     }
 
     async function getRecent() {
-        const response = await fetch(API.recent);
+        const response = await fetch(API.recent, {next: {revalidate: 60 * 5}});
         const json = await response.json();
         return json;
     }
@@ -21,7 +21,9 @@ export default function useAnime() {
     }
 
     async function getInfo(id: string) {
-        const response = await fetch(`${API.info}/${id}`);
+        const response = await fetch(`${API.info}/${id}`, {
+            next: {revalidate: 60 * 5}
+        });
         const json = await response.json();
         return json;
     }
@@ -32,11 +34,21 @@ export default function useAnime() {
         return json;
     }
 
+    async function getEpisode(id: string) {
+        const data = await fetch(
+            `${location.protocol}//${location.host}/api/anime/fetch_episode/watch/${id}`,
+        );
+        
+        const json_data = await data.json();
+        return json_data;
+    }
+
     return {
         getRecent,
         getPopular,
         getInfo,
-        getSearch
+        getSearch,
+        getEpisode,
     }
 
 }

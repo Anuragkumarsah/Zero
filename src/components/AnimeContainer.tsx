@@ -20,7 +20,7 @@ export default function AnimeContainer({ container_title, recentAnime }: AnimeCo
             </section>
             <div className={styles.card_container}>
                 {recentAnime.map((anime : RecentAnime_Interface, id: any) => (
-                    <AnimeCard key={id} anime_id={anime.anime.slug} duration={anime.anime.duration} format={anime.anime.format} anime_title={anime.anime.title.english || anime.anime.title.romaji} image_url={anime.anime.coverImage} info={`EP: ${anime.number}`} episode={anime.number}/>
+                    <AnimeCard key={id} episode_id={anime.id} anime_id={anime.anime.slug} duration={anime.anime.duration} format={anime.anime.format} anime_title={anime.anime.title.english || anime.anime.title.romaji} image_url={anime.anime.coverImage} info={`EP: ${anime.number}`} episode={anime.number}/>
                 ))}
             </div>
         </div>

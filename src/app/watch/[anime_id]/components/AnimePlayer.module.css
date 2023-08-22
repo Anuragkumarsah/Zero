@@ -1,0 +1,13 @@
+.art_player {
+    height: 80vh;
+    width: 100%;
+}
+
+.loading_screen {
+    height: 80vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(20px);
+    -webkit-filter: blur(20px);
+}
