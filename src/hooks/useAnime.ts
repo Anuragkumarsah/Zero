@@ -9,21 +9,23 @@ export default function useAnime() {
     }
 
     async function getRecent() {
-        const response = await fetch(API.recent, {next: {revalidate: 60 * 5}});
+        const response = await fetch(`${API.recent}?${new URLSearchParams({
+            perPage: '12',
+        })}`, {next: {revalidate: 60 * 5}});
         const json = await response.json();
         return json;
     }
 
     async function getPopular() {
-        const response = await fetch(API.popular);
+        const response = await fetch(`${API.popular}?${new URLSearchParams({
+            perPage: '12',
+        })}`, {next: {revalidate: 60 * 60 * 24}});
         const json = await response.json();
         return json;
     }
 
     async function getInfo(id: string) {
-        const response = await fetch(`${API.info}/${id}`, {
-            next: {revalidate: 60 * 5}
-        });
+        const response = await fetch(`${API.info}/${id}`);
         const json = await response.json();
         return json;
     }
@@ -35,6 +37,8 @@ export default function useAnime() {
     }
 
     async function getEpisode(id: string) {
+        console.log(id);
+        
         const data = await fetch(
             `${location.protocol}//${location.host}/api/anime/fetch_episode/watch/${id}`,
         );

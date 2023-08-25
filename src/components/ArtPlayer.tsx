@@ -30,7 +30,7 @@ function ArtPlayer({ option, getInstance, ...rest }: any) {
         art.destroy(false);
       }
     };
-  }, []);
+  }, [getInstance, option]);
 
   return <div ref={artRef} {...rest}></div>;
 }

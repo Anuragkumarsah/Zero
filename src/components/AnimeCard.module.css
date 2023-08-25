@@ -1,7 +1,7 @@
 .anime_card {
     color: #ed9e5a;
-    width: calc(20% - 1rem);
-    height: 350px;
+    width: 100%;
+    height: calc(100% - 1rem);
     position: relative;
     border-radius: 10px;
     transition: all .2s ease-in-out;
@@ -126,24 +126,4 @@
     z-index: 2;
     box-sizing: border-box;
     background: linear-gradient(0deg, rgb(40, 30, 30) 0, rgba(42,44,49,0) 40%);
-}
-
-
-@media screen and (max-width: 1160px) {
-    .anime_card {
-        width: calc(25% - 1rem);
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .anime_card {
-        width: calc(30%);
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .anime_card {
-        width: calc(50% - 0.5rem);
-        height: max(300px, fit-content);
-    }
 }

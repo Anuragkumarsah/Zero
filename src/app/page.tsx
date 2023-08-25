@@ -1,6 +1,8 @@
 import { Anime_Interface, RecentAnime_Interface } from "@/@types/Enime";
 import AnimeContainer from "@/components/AnimeContainer";
 import useAnime from "@/hooks/useAnime";
+import Carousel from "@/components/Carousel";
+
 
 import styles from './page.module.css'
 
@@ -15,7 +17,9 @@ export default async function Home() {
 
   return (
     <div className={styles.app}>
-        <AnimeContainer container_title="Latest Episodes" recentAnime={recentAnime.data}/>
+        <Carousel topAnime={popularAnime.data.slice(0, 9)}/>
+        <AnimeContainer container_title="Latest Episodes" recentAnime={recentAnime.data} popularAnime={null}/>
+        <AnimeContainer container_title="Popular Episodes" popularAnime={popularAnime.data} recentAnime={null}/>
     </div>
   )
 }

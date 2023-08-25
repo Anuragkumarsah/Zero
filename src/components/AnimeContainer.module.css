@@ -1,9 +1,10 @@
 .card_container {
-    display: flex;
+    display: grid;
     list-style: none;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
+    grid-template-rows: max-content;
+    overflow: hidden;
+    grid-gap: 1rem;
     width: 75%;
     margin: 0;
     padding: 0;
@@ -11,27 +12,34 @@
 
 .anime_container {
     color: #ed9e5a;
+    font-size: clamp(0.7rem, 2vw, 1rem);
+    margin-left: 1rem;
 }
 
 .container_title {
-    margin: 0 ;
+    margin-top: 50px ;
 }
 
 .anime_top_section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
 }
 
-@media screen and (max-width: 1160px) {
+@media screen and (max-width: 1400px) {
+    .card_container {
+        grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    }
+}
+
+@media screen and (max-width: 1200px) {
     .card_container {
         width: 100%;
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 490px) {
     .card_container {
-        justify-content: center;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     }
 }

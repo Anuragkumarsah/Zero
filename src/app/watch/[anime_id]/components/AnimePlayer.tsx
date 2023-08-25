@@ -1,8 +1,8 @@
 "use client";
 
 import { EpisodeInfo_Interface, EpisodeSources_Interface } from "@/@types/AnimeType";
-import { Anime_Interface, Episode } from "@/@types/Enime";
-import React, { useState, useEffect } from "react";
+import { Anime_Interface, Episode, Source } from "@/@types/Enime";
+import React, { useState, useEffect, useCallback } from "react";
 import useAnime from "@/hooks/useAnime";
 import Hls from "hls.js";
 import loading from "@/assets/images/loader.svg";
@@ -26,10 +26,22 @@ const AnimePlayer = ({ episodeInfo, animeInfo }: AnimePlayer_Interface) => {
   const { getEpisode } = useAnime();
 
 
-  const fetchEpisode = async () => {
+  const fetchEpisode = useCallback(async () =>{
     if(!episodeInfo) return;
-    const source = episodeInfo.sources[0].target;
-    const data = await getEpisode(source);
+    // console.log(episodeInfo.sources);
+    
+    const source = episodeInfo.sources.filter((ep_info : Source) => 
+     ep_info.target.split('/')[1] !== "watch" 
+    );
+    // console.log(source);
+    
+    if(source[0] === undefined) {
+      console.log("Episode not found");
+
+      return;
+    };
+    const source_id = source[0].target;
+    const data = await getEpisode(source_id);
     setEpisode_sources(data);
     
     data.sources && data.sources.map((source: EpisodeSources_Interface) => {
@@ -37,7 +49,7 @@ const AnimePlayer = ({ episodeInfo, animeInfo }: AnimePlayer_Interface) => {
             setUrl(source.url);
         }
     })
-  }
+  },[episodeInfo, getEpisode])
   
 
   const configs = {
@@ -104,8 +116,8 @@ const AnimePlayer = ({ episodeInfo, animeInfo }: AnimePlayer_Interface) => {
 
 
   useEffect(() => {
-        fetchEpisode();
-  }, [])
+      fetchEpisode();
+  },[])
   
 
   return episode_sources ? (<Artplayer className={styles.art_player} option={configs}/>):(<div className={styles.loading_screen} style={{backgroundImage:`url(${animeInfo.bannerImage})`}}></div>);

@@ -1,6 +1,8 @@
 body, html{
     background-color: #242428;
     height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 /* width */

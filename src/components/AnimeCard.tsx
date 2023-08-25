@@ -13,7 +13,7 @@ type AnimeCard_Interface = {
   duration: number;
   format: string;
   episode: number;
-  episode_id: string;
+  episode_id: string | undefined;
 };
 
 const AnimeCard = ({
@@ -31,7 +31,7 @@ const AnimeCard = ({
 
   return (
     <div className={styles.anime_card} onClick={() => {
-      router.push(`/watch/${encodeURIComponent(anime_id)}?ep=${episode_id}`)
+      router.push(`/watch/${encodeURIComponent(anime_id)}${episode_id !== undefined ? `?ep=${episode_id}` : ""}`)
     }}>
       <div className={styles.image_container}>
         <Image className={styles.play_button} alt="play" src={play_button} width={50} height={50}/>
@@ -42,7 +42,7 @@ const AnimeCard = ({
           src={image_url}
           width={100}
           height={100}
-          sizes="100vw"
+          sizes="100%"
         />
       </div>
       <section className={styles.info_section}>
