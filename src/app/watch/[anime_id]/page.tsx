@@ -1,32 +1,41 @@
-import { Anime_Interface, Episode } from "@/@types/Enime";
+// import { Anime_Interface, Episode } from "@/@types/Enime";
 import useAnime from "@/hooks/useAnime"
 import AnimePlayer from "./components/AnimePlayer";
+import { AnimeInfo, Episode } from "@/@types/AniList";
 
 type WatchProp_Interface = {
     params: { anime_id: string },
-    searchParams: { [key: string]: string | string[] | undefined },
+    searchParams: { [key: string]: string },
 }
 
+
 export default async function WatchAnime({ params, searchParams} : WatchProp_Interface) {
-    // console.log(searchParams);
+    // console.log(searchParams, params.anime_id);
+
+    if(!searchParams.id) {
+        return <div>Invalid Anime ID</div>
+    }
+
+    const getSortedEpisodes = (episodes: Episode[]) => {
+       return episodes.slice().sort((a, b) => a.number - b.number);
+    }
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const {getInfo} = useAnime();
 
-    const anime_data : Anime_Interface = await getInfo(params.anime_id);
-    
-    
-    let episode_data = searchParams.ep !== undefined ? anime_data?.episodes?.filter((episode: Episode) => episode.id === searchParams.ep)[0] : anime_data?.episodes.length > 0 ? anime_data?.episodes[0] : undefined;
-    if(episode_data === undefined) {
-        return (
-            <div>
-                <h1>Episode Not Found</h1>
-            </div>
-        )
+    const anime_data : AnimeInfo = await getInfo(searchParams.id as string);
+    const episodes : Episode[] = getSortedEpisodes(anime_data.episodes);
+    const episode_index : number = searchParams.ep ? episodes.findIndex((episode) => episode.number === parseInt(searchParams.ep)) : 0;
+    // console.log(anime_data);
+    if(!episodes || episodes.length === 0 || episode_index === -1) {
+        return <div>Episode not found</div>
     }
+    const episode_data : Episode = episodes[episode_index];
+    
     return (
         <div>
-            <AnimePlayer episodeInfo={episode_data} animeInfo={anime_data} />
+
+            <AnimePlayer episodeInfo={episode_data} cover_image={anime_data.cover} />
         </div>
     )
 }

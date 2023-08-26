@@ -6,36 +6,36 @@ import { useRouter } from "next/navigation";
 import play_button from "../assets/images/play_button.svg"
 
 type AnimeCard_Interface = {
-  anime_id: string;
-  anime_title: string;
+  anime_title: string | null;
   image_url: string;
   info: string;
-  duration: number;
   format: string;
   episode: number;
-  episode_id: string | undefined;
+  episode_title: string;
+  anime_id: string;
+  isPopular?: boolean;
 };
 
 const AnimeCard = ({
-  anime_id,
-  duration,
   format,
   anime_title,
   image_url,
   info,
   episode,
-  episode_id,
+  anime_id,
+  episode_title,
+  isPopular,
 }: AnimeCard_Interface) => {
 
   const router = useRouter();
 
   return (
     <div className={styles.anime_card} onClick={() => {
-      router.push(`/watch/${encodeURIComponent(anime_id)}${episode_id !== undefined ? `?ep=${episode_id}` : ""}`)
+      router.push(`/watch/anime?id=${anime_id } ${!isPopular ? `&ep${episode}` : ''}`)
     }}>
       <div className={styles.image_container}>
         <Image className={styles.play_button} alt="play" src={play_button} width={50} height={50}/>
-        <p className={styles.episode_card}>{`EP: ${episode}`}</p>
+        <p className={styles.episode_card}>{info}</p>
         <Image
           className={styles.card_image}
           alt="image"
@@ -48,9 +48,9 @@ const AnimeCard = ({
       <section className={styles.info_section}>
         <p className={styles.film_name}>{anime_title}</p>
         <section className={styles.film_info}>
-          {" "}
-          <p>{format}</p> <span className={styles.dot}></span>{" "}
-          <p>{duration ? duration : "??"} m</p>
+          <p>{format}</p> <span className={styles.dot}></span>
+          {episode_title ? <p className={styles.film_name}>{episode_title}</p>
+          : <p className={styles.film_name}>{episode}m</p>}
         </section>
       </section>
     </div>

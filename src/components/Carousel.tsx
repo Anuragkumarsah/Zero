@@ -7,22 +7,20 @@ import { Carousel as CarouselBody} from "react-responsive-carousel";
 import styles from "./Carousel.module.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import play_button from "@/assets/images/play_button_2.svg"
+import { PopularAnimeData } from "@/@types/AniList";
 
 
 type CarouselBody_Interface = {
-    topAnime: Anime_Interface[];
+    topAnime: PopularAnimeData[];
 }
 
 type CarouselItem_Interface = {
     id: number;
     bannerImage: string;
-    title: string;
+    title: string | null;
     description: string;
     anime_id: string;
 }
-
-
-
 
 
 function CarouselItem({id, bannerImage, title, description, anime_id}: CarouselItem_Interface) {
@@ -44,12 +42,12 @@ function CarouselItem({id, bannerImage, title, description, anime_id}: CarouselI
     return (
         <div id={`slide${id}`} className={styles.carouselBody}>
             <div className={styles.carouselImageContainer}>
-            <Image className={styles.carouselImage} src={bannerImage} alt={title} width={1600} height={800}/>
+            <Image className={styles.carouselImage} src={bannerImage} alt={title ?? ''} width={1600} height={800}/>
             </div><section className={styles.carouselInfoSection}>
                 <p className={styles.carouselSpotlight}>#{id + 1} Spotlight</p>
                 <h2 className={styles.animeTitle}>{title}</h2>
                 <p className={styles.carouselAnimeDesc}>{cleanText}</p>
-                <Link className={styles.watchButton} href={`/watch/${encodeURIComponent(anime_id)}`}>
+                <Link className={styles.watchButton} href={`/watch/anime?id=${anime_id}`}>
                     <Image src={play_button} alt="" width={15} height={15}/>
                     <p>Watch Now</p>
                 </Link>
@@ -70,14 +68,14 @@ function Carousel({topAnime}: CarouselBody_Interface) {
             stopOnHover={false}
         >
             {
-                topAnime.map((anime: Anime_Interface, index: number) => (
+                topAnime.map((anime: PopularAnimeData, index: number) => (
                     <CarouselItem 
                         key={index}
                         id={index}
-                        bannerImage={anime.bannerImage}
+                        bannerImage={anime.image}
                         title={anime.title.english || anime.title.romaji}
                         description={anime.description}
-                        anime_id={anime.slug}
+                        anime_id={anime.id}
                     />
                 ))
             }

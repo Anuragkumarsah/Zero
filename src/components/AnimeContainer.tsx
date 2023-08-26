@@ -4,27 +4,28 @@ import { Anime_Interface, RecentAnime_Interface } from "@/@types/Enime"
 import AnimeCard from "./AnimeCard"
 
 import styles from './AnimeContainer.module.css'
+import { AnimeData, PopularAnimeData, RecentAnime } from "@/@types/AniList"
 
 
-type AnimeContainer_Interface = {
+type IAnimeContainer = {
     container_title: string,
-    recentAnime: RecentAnime_Interface[] | null,
-    popularAnime: Anime_Interface[] | null
+    recentAnime: AnimeData[] | null,
+    popularAnime: PopularAnimeData[] | null
 }
 
-export default function AnimeContainer({ container_title, recentAnime, popularAnime }: AnimeContainer_Interface) {
-
+export default function AnimeContainer({ container_title, recentAnime, popularAnime }: IAnimeContainer) {
+    // console.log(recentAnime);
     return (
         <div className={styles.anime_container}>
             <section className={styles.anime_top_section}>
             <h2 className={styles.container_title}>{container_title}</h2>
             </section>
             <div className={styles.card_container}>
-                {recentAnime !==null && recentAnime?.map((anime : RecentAnime_Interface, id: any) => (
-                    <AnimeCard key={id} episode_id={anime.id} anime_id={anime.anime.slug} duration={anime.anime.duration} format={anime.anime.format} anime_title={anime.anime.title.english || anime.anime.title.romaji} image_url={anime.anime.coverImage} info={`EP: ${anime.number}`} episode={anime.number}/>
+                {recentAnime !==null && recentAnime?.map((anime : AnimeData, id: any) => (
+                    <AnimeCard key={id} anime_id={anime.id} format={anime.type} anime_title={anime.title.english || anime.title.romaji} image_url={anime.image} info={`EP: ${anime.episodeNumber}`} episode={anime.episodeNumber} episode_title={anime.episodeTitle}/>
                 ))}
-                { popularAnime !== null && popularAnime?.map((anime : Anime_Interface, id: any) => (
-                    <AnimeCard key={id} episode_id={undefined} anime_id={anime.slug} duration={anime.duration} format={anime.format} anime_title={anime.title?.english || anime.title?.romaji} image_url={anime.coverImage} info={`EPS: ${anime.currentEpisode}`} episode={anime.currentEpisode}/>
+                { popularAnime !== null && popularAnime?.map((anime : PopularAnimeData, id: any) => (
+                    <AnimeCard key={id} anime_id={anime.id} format={anime.type} anime_title={anime.title.english || anime.title.romaji} image_url={anime.image} info={`Total EP: ${anime.totalEpisodes}`} episode={anime.duration} episode_title={''} isPopular={true}/>
                 ))}
             </div>
         </div>

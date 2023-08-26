@@ -77,20 +77,18 @@
 
 .film_info {
     display: flex;
+    width: 100%;
     align-items: center;
     font-size: 1rem;
     color: #999;
-    flex-wrap: nowrap;
     margin-top: 8px;
     overflow: hidden;
 }
 
 .film_info > p {
-    
     width: max-content;
-    display: inline-block;
-
     margin: 0;
+    text-align: left;
 }
 
 .dot {
@@ -98,7 +96,7 @@
     text-align: center;
     height: 4px;
     width: 4px;
-    margin: 0 6px;
+    margin: 0 10px;
     background-color: #999;
     border-radius: 50%;
 }

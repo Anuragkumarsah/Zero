@@ -1,11 +1,11 @@
 "use client";
 
 import { EpisodeInfo_Interface, EpisodeSources_Interface } from "@/@types/AnimeType";
-import { Anime_Interface, Episode, Source } from "@/@types/Enime";
+import { AnimeInfo, Episode } from "@/@types/AniList";
 import React, { useState, useEffect, useCallback } from "react";
 import useAnime from "@/hooks/useAnime";
 import Hls from "hls.js";
-import loading from "@/assets/images/loader.svg";
+import loading from "@/assets/images/rem-loader-image.gif";
 import play_button from "@/assets/images/play_button.svg";
 import Artplayer from "@/components/ArtPlayer";
 
@@ -13,10 +13,10 @@ import styles from "./AnimePlayer.module.css";
 
 type AnimePlayer_Interface = {
   episodeInfo: Episode;
-  animeInfo: Anime_Interface;
+  cover_image: string;
 };
 
-const AnimePlayer = ({ episodeInfo, animeInfo }: AnimePlayer_Interface) => {
+const AnimePlayer = ({ episodeInfo, cover_image }: AnimePlayer_Interface) => {
 
   // console.log(episodeInfo, animeInfo);
   
@@ -30,18 +30,15 @@ const AnimePlayer = ({ episodeInfo, animeInfo }: AnimePlayer_Interface) => {
     if(!episodeInfo) return;
     // console.log(episodeInfo.sources);
     
-    const source = episodeInfo.sources.filter((ep_info : Source) => 
-     ep_info.target.split('/')[1] !== "watch" 
-    );
+    const source = episodeInfo.id;
     // console.log(source);
     
-    if(source[0] === undefined) {
+    if(source === undefined) {
       console.log("Episode not found");
 
       return;
-    };
-    const source_id = source[0].target;
-    const data = await getEpisode(source_id);
+    };;
+    const data = await getEpisode(source);
     setEpisode_sources(data);
     
     data.sources && data.sources.map((source: EpisodeSources_Interface) => {
@@ -65,7 +62,7 @@ const AnimePlayer = ({ episodeInfo, animeInfo }: AnimePlayer_Interface) => {
             }
         }
     },
-    title: animeInfo.title,
+    title: episodeInfo.title ?? "",
     poster: episodeInfo?.image ?? "",
     volume: 1.0,
     isLive: false,
@@ -109,7 +106,7 @@ const AnimePlayer = ({ episodeInfo, animeInfo }: AnimePlayer_Interface) => {
         encoding: "utf-8",
     },
     icons: {
-        loading: `<img height="100" width="100" src="${loading.src}" />`,
+        loading: `<img height="100" width="100" style="border-radius:50%;" src="${loading.src}" />`,
         state: `<img height="100" width="100" style="opacity:1" src="${play_button.src}" />`,
     }
   }
@@ -120,7 +117,7 @@ const AnimePlayer = ({ episodeInfo, animeInfo }: AnimePlayer_Interface) => {
   },[])
   
 
-  return episode_sources ? (<Artplayer className={styles.art_player} option={configs}/>):(<div className={styles.loading_screen} style={{backgroundImage:`url(${animeInfo.bannerImage})`}}></div>);
+  return episode_sources ? (<Artplayer className={styles.art_player} option={configs}/>):(<div className={styles.loading_screen} style={{backgroundImage:`url(${cover_image})`}}></div>);
 };
 
 export default AnimePlayer;

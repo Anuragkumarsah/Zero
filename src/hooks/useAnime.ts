@@ -1,11 +1,12 @@
-import { ANIME_URL, BASE_URL } from "@/utils/constants";
+import { ANIME_URL, ENIME_URL } from "@/utils/constants";
 
 export default function useAnime() {
     const API = {
-        recent: `${ANIME_URL}/recent`,
+        recent: `${ANIME_URL}/recent-episodes`,
         popular: `${ANIME_URL}/popular`,
-        info: `${ANIME_URL}/anime`,
-        search: `${ANIME_URL}/search`,
+        trending: `${ANIME_URL}/trending`,
+        info: `${ANIME_URL}/info`,
+        search: `${ANIME_URL}`,
     }
 
     async function getRecent() {
@@ -19,6 +20,14 @@ export default function useAnime() {
     async function getPopular() {
         const response = await fetch(`${API.popular}?${new URLSearchParams({
             perPage: '12',
+        })}`, {next: {revalidate: 60 * 60 * 24}});
+        const json = await response.json();
+        return json;
+    }
+
+    async function getTrending() {
+        const response = await fetch(`${API.trending}?${new URLSearchParams({
+            perPage: '10',
         })}`, {next: {revalidate: 60 * 60 * 24}});
         const json = await response.json();
         return json;
@@ -50,6 +59,7 @@ export default function useAnime() {
     return {
         getRecent,
         getPopular,
+        getTrending,
         getInfo,
         getSearch,
         getEpisode,
