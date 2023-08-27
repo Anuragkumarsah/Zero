@@ -2,9 +2,11 @@ import { NewsFeed } from "@/@types/AnimeNewsNetwork";
 import Image from "next/image";
 import React from "react";
 import styles from "./NewsFeeds.module.css";
+import Link from "next/link";
 
 const SingleNewsFeed = ({ news }: { news: NewsFeed }) => {
   return (
+    <Link className={styles.ann_link} href={news.url} target="blank">
     <div className={styles.feed}>
       <Image
         className={styles.feed_image}
@@ -18,6 +20,7 @@ const SingleNewsFeed = ({ news }: { news: NewsFeed }) => {
         <p className={styles.feed_date}>Updated At: {news.uploadedAt}</p>
       </div>
     </div>
+    </Link>
   );
 };
 
