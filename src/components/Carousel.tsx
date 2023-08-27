@@ -42,7 +42,7 @@ function CarouselItem({id, bannerImage, title, description, anime_id}: CarouselI
     return (
         <div id={`slide${id}`} className={styles.carouselBody}>
             <div className={styles.carouselImageContainer}>
-            <Image className={styles.carouselImage} src={bannerImage} alt={title ?? ''} width={1600} height={800}/>
+            <Image className={styles.carouselImage} src={bannerImage} alt={title ?? ''} width={800} height={600} priority/>
             </div><section className={styles.carouselInfoSection}>
                 <p className={styles.carouselSpotlight}>#{id + 1} Spotlight</p>
                 <h2 className={styles.animeTitle}>{title}</h2>
