@@ -22,7 +22,7 @@ const AnimePlayer = ({ episodeInfo, cover_image }: AnimePlayer_Interface) => {
   
   const [episode_sources, setEpisode_sources] =
     useState<EpisodeInfo_Interface | null>(null);
-  const [url, setUrl] = useState<string | null>(null);
+  const [url, setUrl] = useState<string>('');
   const { getEpisode } = useAnime();
 
 
@@ -41,11 +41,7 @@ const AnimePlayer = ({ episodeInfo, cover_image }: AnimePlayer_Interface) => {
     const data = await getEpisode(source);
     setEpisode_sources(data);
     
-    data.sources && data.sources.map((source: EpisodeSources_Interface) => {
-        if(source.quality === "720p") {
-            setUrl(source.url);
-        }
-    })
+    data.sources && setUrl(data.sources[0].url);
   },[episodeInfo, getEpisode])
   
 
