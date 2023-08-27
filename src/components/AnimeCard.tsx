@@ -31,7 +31,7 @@ const AnimeCard = ({
 
   return (
     <div className={styles.anime_card} onClick={() => {
-      router.push(`/watch/anime?id=${anime_id } ${!isPopular ? `&ep${episode}` : ''}`)
+      router.push(`/watch/anime?id=${anime_id } ${!isPopular ? `&ep=${episode}` : ''}`)
     }}>
       <div className={styles.image_container}>
         <Image className={styles.play_button} alt="play" src={play_button} width={50} height={50}/>

@@ -24,6 +24,9 @@ export default async function WatchAnime({ params, searchParams} : WatchProp_Int
     const {getInfo} = useAnime();
 
     const anime_data : AnimeInfo = await getInfo(searchParams.id as string);
+    if(anime_data.episodes === undefined) {
+        return <div>Failed to load resource</div>
+    }
     const episodes : Episode[] = getSortedEpisodes(anime_data.episodes);
     const episode_index : number = searchParams.ep ? episodes.findIndex((episode) => episode.number === parseInt(searchParams.ep)) : 0;
     // console.log(anime_data);
