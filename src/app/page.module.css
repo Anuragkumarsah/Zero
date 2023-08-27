@@ -1,9 +1,30 @@
 .app {
     max-width: 1800px;
+    margin: 0 auto;
 }
 
+.main_body {
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+    padding: 0;
+}
+
+@media screen and (max-width: 1350px) {
+    .main_body {
+        grid-template-columns: 7fr 3fr;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .main_body {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+    }
+}
+/* 
 @media screen and (max-width: 600px) {
     .app {
         padding: 0; 
     }
-}
+} */

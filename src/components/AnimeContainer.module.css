@@ -5,15 +5,15 @@
     grid-template-rows: max-content;
     overflow: hidden;
     grid-gap: 1rem;
-    width: 75%;
+    width: 100%;
     margin: 0;
     padding: 0;
 }
 
 .anime_container {
     color: #ed9e5a;
-    font-size: clamp(0.7rem, 2vw, 1rem);
-    margin-left: 1rem;
+    font-size: 1rem;
+    margin: 0 1rem;
 }
 
 .container_title {
@@ -26,7 +26,7 @@
     align-items: center;
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1350px) {
     .card_container {
         grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
     }
