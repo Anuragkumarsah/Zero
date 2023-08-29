@@ -27,7 +27,7 @@ export default async function Home() {
     <div className={styles.app}>
         <Carousel topAnime={trendingAnime.results}/>
         <div className={styles.main_body}>
-          <div id="firstChild">
+          <div className={styles.anime_container}>
           <AnimeContainer container_title="Latest Episodes" recentAnime={recentAnime.results} popularAnime={null}/>
           <AnimeContainer container_title="Popular Episodes" popularAnime={popularAnime.results} recentAnime={null}/>
           </div>

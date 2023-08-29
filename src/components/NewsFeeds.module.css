@@ -1,24 +1,31 @@
 .feed_container {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     width: 90%;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
     border-left: 5px solid #ed9e5a; 
     border-bottom: 5px solid #ed9e5a; 
     border-radius: 0.5rem;
-    height: calc(100vh * 1.2);
+    height: 100vh;
     gap: 0.5rem;
     overflow-y: scroll;
-    padding: 1rem 0 1rem;
+    padding: 0.8rem 0 0.8rem;
 }
 
 .feed_section {
     font-size: clamp(0.7rem, 2vw, 1rem);
-    margin: 0 auto;
+    margin: 0;
+    /* width: 90%; */
 }
 
 .feed_container::-webkit-scrollbar {
-    height: 0.4rem;
+    width: 1rem;
+}
+
+.feed_container::-webkit-scrollbar:hover {
+    cursor: pointer;
 }
 
 .feed_container::-webkit-scrollbar-track {
@@ -42,6 +49,7 @@
     color: #fff;
     background-color: #242425;
     border-radius: 0.5rem;
+    z-index: 100;
 }
 
 .feed:hover {
@@ -71,6 +79,7 @@
 
 .ann_link {
     text-decoration: none;
+    margin: 0 0rem;
 }
 
 .feed_title {

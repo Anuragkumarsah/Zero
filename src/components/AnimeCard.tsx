@@ -46,7 +46,7 @@ const AnimeCard = ({
         />
       </div>
       <section className={styles.info_section}>
-        <p className={styles.film_name}>{anime_title}</p>
+        <p className={`${styles.film_name} ${styles.anime_name}`}>{anime_title}</p>
         <section className={styles.film_info}>
           <p>{format}</p> <span className={styles.dot}></span>
           {episode_title ? <p className={styles.film_name}>{episode_title}</p>

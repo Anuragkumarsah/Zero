@@ -75,6 +75,14 @@
     margin: 6px 0 4px 0;
 }
 
+.anime_name {
+    transition: all 0.3s ease-in-out;
+}
+
+.anime_card:hover .anime_name {
+    color: #ed9e5a;
+}
+
 .film_info {
     display: flex;
     width: 100%;
