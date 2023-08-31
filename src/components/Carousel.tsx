@@ -42,7 +42,7 @@ function CarouselItem({id, bannerImage, title, description, anime_id}: CarouselI
     return (
         <div id={`slide${id}`} className={styles.carouselBody}>
             <div className={styles.carouselImageContainer}>
-            <Image className={styles.carouselImage} src={bannerImage} alt={title ?? ''} width={800} height={600} priority/>
+            <Image id={styles.carouselImg} className={styles.carouselImage} src={bannerImage} alt={title ?? ''} width={2400} height={1000} priority/>
             </div><section className={styles.carouselInfoSection}>
                 <p className={styles.carouselSpotlight}>#{id + 1} Spotlight</p>
                 <h2 className={styles.animeTitle}>{title}</h2>
@@ -61,6 +61,9 @@ function CarouselItem({id, bannerImage, title, description, anime_id}: CarouselI
 function Carousel({topAnime}: CarouselBody_Interface) {
     return (
         <CarouselBody
+            emulateTouch
+            swipeable
+            showArrows={false}
             autoPlay 
             showThumbs={false}
             infiniteLoop
@@ -72,7 +75,7 @@ function Carousel({topAnime}: CarouselBody_Interface) {
                     <CarouselItem 
                         key={index}
                         id={index}
-                        bannerImage={anime.image}
+                        bannerImage={anime.cover}
                         title={anime.title.english || anime.title.romaji}
                         description={anime.description}
                         anime_id={anime.id}

@@ -21,7 +21,6 @@ export default async function Home() {
   
   const newsFeed : NewsFeed[] = await getNewsFeed();
 
-  
 
   return (
     <div className={styles.app}>
