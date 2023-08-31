@@ -21,7 +21,7 @@
 }
 
 .feed_container::-webkit-scrollbar {
-    width: 1rem;
+    width: 8px;
 }
 
 .feed_container::-webkit-scrollbar:hover {
