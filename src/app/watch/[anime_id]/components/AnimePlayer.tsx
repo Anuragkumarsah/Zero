@@ -110,6 +110,7 @@ const AnimePlayer = ({ episodeInfo, cover_image }: AnimePlayer_Interface) => {
 
   useEffect(() => {
       fetchEpisode();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   
 
