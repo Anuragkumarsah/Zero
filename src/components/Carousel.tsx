@@ -61,9 +61,9 @@ function CarouselItem({id, bannerImage, title, description, anime_id}: CarouselI
 function Carousel({topAnime}: CarouselBody_Interface) {
     return (
         <CarouselBody
-            emulateTouch
-            swipeable
-            showArrows={false}
+            // emulateTouch
+            // swipeable
+            // showArrows={false}
             autoPlay 
             showThumbs={false}
             infiniteLoop
