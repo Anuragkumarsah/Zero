@@ -89,7 +89,7 @@ const AnimePlayer = ({ episodeInfo, cover_image }: AnimePlayer_Interface) => {
       crossOrigin: "anonymous",
     },
     quality: episode_sources?.sources ? episode_sources.sources.map((source: EpisodeSources_Interface) => ({
-        default: source.quality === "720p",
+        default: source.quality === episode_sources.sources[0].quality,
         html: source.quality,
         url: source.url,
     })) : [],
