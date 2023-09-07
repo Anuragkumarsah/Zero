@@ -19,7 +19,7 @@ export default async function Home() {
   // console.log(recentAnime);
   // const trendingAnime : {results: PopularAnimeData[]} = await getTrending();
   
-  const newsFeed : NewsFeed[] = await getNewsFeed();
+  // const newsFeed : NewsFeed[] = await getNewsFeed();
 
   
 
@@ -31,7 +31,7 @@ export default async function Home() {
           {/* <AnimeContainer container_title="Latest Episodes" recentAnime={recentAnime.results} popularAnime={null}/> */}
           {/* <AnimeContainer container_title="Popular Episodes" popularAnime={popularAnime.results} recentAnime={null}/> */}
           </div>
-          <NewsFeeds newsFeed={newsFeed.slice(0,10)}/>
+          {/* <NewsFeeds newsFeed={newsFeed.slice(0,10)}/> */}
         </div>
     </div>
   )
