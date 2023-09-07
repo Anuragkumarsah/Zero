@@ -1,3 +1,5 @@
+"use client"
+
 import { NewsFeed } from "@/@types/AnimeNewsNetwork";
 import Image from "next/image";
 import React from "react";
@@ -6,7 +8,7 @@ import Link from "next/link";
 
 const SingleNewsFeed = ({ news }: { news: NewsFeed }) => {
   return (
-    <Link className={styles.ann_link} href={news.url} target="blank">
+    <Link className={styles.ann_link} href={news.url} target="_blank">
     <div className={styles.feed}>
       <Image
         className={styles.feed_image}
