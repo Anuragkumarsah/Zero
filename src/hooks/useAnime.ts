@@ -45,14 +45,24 @@ export default function useAnime() {
 
   async function getInfo(id: string) {
     const response = await fetch(`${API.info}/${id}`);
-    const json = await response.json();
-    return json;
+    const text = await response.text();
+    try{
+      const json = JSON.parse(text);
+      return json;
+    } catch(e) {
+      return null;
+    }
   }
 
   async function getSearch(query: string) {
     const response = await fetch(`${API.search}/${query}`);
-    const json = await response.json();
-    return json;
+    const text = await response.text();
+    try{
+      const json = JSON.parse(text);
+      return json;
+    } catch(e) {
+      return null;
+    }
   }
 
   async function getEpisode(id: string) {
@@ -62,8 +72,13 @@ export default function useAnime() {
       `${location.protocol}//${location.host}/api/anime/fetch_episode/watch/${id}`
     );
 
-    const json_data = await data.json();
-    return json_data;
+    const text = await data.text();
+    try{
+      const json = JSON.parse(text);
+      return json;
+    } catch(e) {
+      return null;
+    }
   }
 
   async function getNewsFeed() {

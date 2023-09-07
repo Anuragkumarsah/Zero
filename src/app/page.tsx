@@ -1,4 +1,3 @@
-import { Anime_Interface, RecentAnime_Interface } from "@/@types/Enime";
 import AnimeContainer from "@/components/AnimeContainer";
 import useAnime from "@/hooks/useAnime";
 import Carousel from "@/components/Carousel";
@@ -6,7 +5,7 @@ import NewsFeeds from "@/components/NewsFeeds";
 
 
 import styles from './page.module.css'
-import { AnimeData, PopularAnimeData, RecentAnime } from "@/@types/AniList";
+import { AnimeData, PopularAnimeData } from "@/@types/AniList";
 import { NewsFeed } from "@/@types/AnimeNewsNetwork";
 
 export default async function Home() {

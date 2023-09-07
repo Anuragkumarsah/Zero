@@ -12,7 +12,7 @@ type WatchProp_Interface = {
 export default async function WatchAnime({ params, searchParams} : WatchProp_Interface) {
     // console.log(searchParams, params.anime_id);
 
-    if(!searchParams.id) {
+    if(searchParams.id === undefined) {
         return <div>Invalid Anime ID</div>
     }
 
@@ -24,7 +24,7 @@ export default async function WatchAnime({ params, searchParams} : WatchProp_Int
     const {getInfo} = useAnime();
 
     const anime_data : AnimeInfo = await getInfo(searchParams.id as string);
-    if(anime_data.episodes === undefined) {
+    if(anime_data && anime_data.episodes === undefined) {
         return <div>Failed to load resource</div>
     }
     const episodes : Episode[] = getSortedEpisodes(anime_data.episodes);
