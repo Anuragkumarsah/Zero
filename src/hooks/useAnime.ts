@@ -35,7 +35,7 @@ export default function useAnime() {
   async function getTrending() {
     const response = await fetch(
       `${API.trending}?${new URLSearchParams({
-        perPage: "10",
+        perPage: "20",
       })}`,
       { next: { revalidate: 60 * 60 * 24 } }
     );
