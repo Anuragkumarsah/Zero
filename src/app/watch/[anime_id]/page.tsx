@@ -28,12 +28,13 @@ export default async function WatchAnime({ params, searchParams} : WatchProp_Int
         return <div>Failed to load resource</div>
     }
     const episodes : Episode[] = getSortedEpisodes(anime_data.episodes);
-    const episode_index : number = searchParams.ep ? episodes.findIndex((episode) => episode.number === parseInt(searchParams.ep)) : 0;
-    // console.log(anime_data);
-    if(!episodes || episodes.length === 0 || episode_index === -1) {
+    const episode_data : Episode = searchParams.ep ? episodes.filter((episode) => episode.number === parseInt(searchParams.ep))[0] : episodes[0];
+    
+    // console.log(episodes.filter((episode) => episode.number === parseInt(searchParams.ep)));
+    
+    if(!episodes || episodes.length === 0 || episode_data === undefined || episode_data === null) {
         return <div>Episode not found</div>
     }
-    const episode_data : Episode = episodes[episode_index];
     
     return (
         <div>

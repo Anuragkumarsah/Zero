@@ -41,7 +41,7 @@ const AnimePlayer = ({ episodeInfo, cover_image }: AnimePlayer_Interface) => {
     const data = await getEpisode(source);
     setEpisode_sources(data);
     
-    data.sources && setUrl(data.sources[0].url);
+    data?.sources && setUrl(data.sources[0].url);
   },[episodeInfo, getEpisode])
   
 
