@@ -1,6 +1,6 @@
 Watch your favorite anime without any ads or trackers.
 
-Zero stream is a free, open-source anime streaming website. It is build using the [Next JS 13](http://nextjs.org) framwwork and CSS.
+Zero stream is a free, open-source anime streaming website. It is build using the [Next JS 13](http://nextjs.org) framework and CSS.
 
 **Zero stream is still under development and one can encounter bugs, feel free to open any issue for bugs or required features**
 
