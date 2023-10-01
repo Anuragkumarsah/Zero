@@ -8,10 +8,11 @@ import styles from "./Carousel.module.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import play_button from "@/assets/images/play_button_2.svg"
 import { PopularAnimeData } from "@/@types/AniList";
+import { IEpisodeData } from "@/@types/PinkishHue";
 
 
 type CarouselBody_Interface = {
-    topAnime: PopularAnimeData[];
+    topAnime: IEpisodeData[];
 }
 
 type CarouselItem_Interface = {
@@ -71,12 +72,12 @@ function Carousel({topAnime}: CarouselBody_Interface) {
             stopOnHover={false}
         >
             {
-                topAnime.map((anime: PopularAnimeData, index: number) => (
+                topAnime.map((anime: IEpisodeData, index: number) => (
                     <CarouselItem 
                         key={index}
                         id={index}
-                        bannerImage={anime.cover}
-                        title={anime.title.english || anime.title.romaji}
+                        bannerImage={anime.image}
+                        title={anime.title || anime.alternateTitle}
                         description={anime.description}
                         anime_id={anime.id}
                     />

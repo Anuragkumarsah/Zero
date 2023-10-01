@@ -1,13 +1,14 @@
-import { ANIME_URL, ENIME_URL, ANIME_NEWS_URL } from "@/utils/constants";
+import { ENIME_URL, ANIME_NEWS_URL, PINKISH_HUE_URL } from "@/utils/constants";
 
+const ANIME_URL = PINKISH_HUE_URL;
 export default function useAnime() {
   const API = {
     recent: `${ANIME_URL}/recent-episodes`,
     popular: `${ANIME_URL}/popular`,
     trending: `${ANIME_URL}/trending`,
     info: `${ANIME_URL}/info`,
-    search: `${ANIME_URL}`,
-    news_feed: `${ANIME_NEWS_URL}/recent-feeds`,
+    search: `${ANIME_URL}/search?keyword=`,
+    source: `${ANIME_URL}/watch`
   };
 
   async function getRecent() {
@@ -34,9 +35,7 @@ export default function useAnime() {
 
   async function getTrending() {
     const response = await fetch(
-      `${API.trending}?${new URLSearchParams({
-        perPage: "20",
-      })}`,
+      `${API.trending}`,
       { next: { revalidate: 60 * 60 * 24 } }
     );
     const json = await response.json();
@@ -73,24 +72,26 @@ export default function useAnime() {
     console.log(id);
 
     const data = await fetch(
-      `${location.protocol}//${location.host}/api/anime/fetch_episode/watch/${id}`
+      `${API.source}/${id}`
     );
+    
 
-    const text = await data.text();
+    const text = await data.json();
+    console.log(text);
+    
     try{
-      const json = JSON.parse(text);
-      return json;
+      return text;
     } catch(e) {
       return null;
     }
   }
 
   async function getNewsFeed() {
-    const response = await fetch(`${API.news_feed}?topic=anime`, {
-      next: { revalidate: 60 * 60 },
-    });
-    const json = await response.json();
-    return json;
+    // const response = await fetch(`${API.news_feed}?topic=anime`, {
+    //   next: { revalidate: 60 * 60 },
+    // });
+    // const json = await response.json();
+    return null;
   }
 
   return {

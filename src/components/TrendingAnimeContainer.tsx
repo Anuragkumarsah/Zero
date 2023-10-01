@@ -3,10 +3,11 @@ import { PopularAnimeData } from '@/@types/AniList'
 import React, {useRef} from 'react'
 import TrendingAnimeCard from './TrendingAnimeCard'
 import styles from './TrendingAnimeContainer.module.css'
+import { IEpisodeData } from '@/@types/PinkishHue'
 
 type ITrendingAnimeContainer = {
     container_title: string,
-    trendingAnime: PopularAnimeData[]
+    trendingAnime: IEpisodeData[]
 }
 
 const TrendingAnimeContainer = ({container_title, trendingAnime} : ITrendingAnimeContainer) => {
@@ -31,8 +32,8 @@ const TrendingAnimeContainer = ({container_title, trendingAnime} : ITrendingAnim
         <div className={styles.slider_container}>
         <div className={styles.trendingAnimeCard_container} ref={container_ref}>
             {
-              trendingAnime.map((anime : PopularAnimeData, id : any) => {
-                return <TrendingAnimeCard key={id} anime_title={anime.title.english || anime.title.romaji || anime.title.native} image={anime.image}/>
+              trendingAnime.map((anime : IEpisodeData, index : any) => {
+                return <TrendingAnimeCard key={index} anime_title={anime.title || anime.alternateTitle} image={anime.image} index={index}/>
               })
             }
         </div>

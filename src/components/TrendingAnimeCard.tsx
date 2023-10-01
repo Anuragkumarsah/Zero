@@ -4,16 +4,19 @@ import styles from './TrendingAnimeCard.module.css'
 
 type ITrendingAnimeCard = {
   anime_title: string | null,
-  image: string
+  image: string,
+  index: number
 }
 
-const TrendingAnimeCard = ({anime_title, image}: ITrendingAnimeCard) => {
+const TrendingAnimeCard = ({anime_title, image, index}: ITrendingAnimeCard) => {
+  // console.log(index);
+  
   return (
-    <div style={{width:"calc(15vw - 20px)", height:"280px", marginLeft:"20px"}}>
+    <div style={{width:"clamp(10vw, calc(15vw - 20px), calc(1800px * 0.15 - 10px))", height:"clamp(11vw, 15vw, 15vw)", marginLeft:"20px"}}>
     <div className={styles.trendingAnime_container}>
         <section className={styles.title_container}>
           <p className={styles.anime_title}>{anime_title?.toLowerCase()}</p>
-          <p className={styles.anime_ranking}>1</p>
+          <p className={styles.anime_ranking}>{index + 1}</p>
         </section>
         <div className={styles.image_container}>
         <Image className={styles.cover_image} src={image} alt={anime_title || ""} width={200} height={250}/>

@@ -12,6 +12,7 @@
     flex-direction: column;
     justify-content: flex-end;
     /* width: 40px; */
+    align-items: center;
     overflow: hidden;
 }
 
@@ -49,6 +50,7 @@
     color: #ed9e5a;
     text-align: center;
     font-size: 1.2rem;
-    font-weight: 900;
+    font-weight: 600;
+    margin-right: 12px;
     margin-bottom: 0;
 }

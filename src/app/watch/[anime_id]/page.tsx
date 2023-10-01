@@ -2,6 +2,7 @@
 import useAnime from "@/hooks/useAnime"
 import AnimePlayer from "./components/AnimePlayer";
 import { AnimeInfo, Episode } from "@/@types/AniList";
+import { IAnimeInfo, IEpisode } from "@/@types/PinkishHue";
 
 type WatchProp_Interface = {
     params: { anime_id: string },
@@ -16,19 +17,19 @@ export default async function WatchAnime({ params, searchParams} : WatchProp_Int
         return <div>Invalid Anime ID</div>
     }
 
-    const getSortedEpisodes = (episodes: Episode[]) => {
-       return episodes.slice().sort((a, b) => a.number - b.number);
+    const getSortedEpisodes = (episodes: IEpisode[]) => {
+       return episodes.slice().sort((a, b) => a.episodeNumber - b.episodeNumber);
     }
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const {getInfo} = useAnime();
 
-    const anime_data : AnimeInfo = await getInfo(searchParams.id as string);
+    const anime_data : IAnimeInfo = await getInfo(searchParams.id as string);
     if(anime_data && anime_data.episodes === undefined) {
         return <div>Failed to load resource</div>
     }
-    const episodes : Episode[] = getSortedEpisodes(anime_data.episodes);
-    const episode_data : Episode = searchParams.ep ? episodes.filter((episode) => episode.number === parseInt(searchParams.ep))[0] : episodes[0];
+    const episodes : IEpisode[] = getSortedEpisodes(anime_data.episodes);
+    const episode_data : IEpisode = searchParams.ep ? episodes.filter((episode) => episode.episodeNumber === parseInt(searchParams.ep))[0] : episodes[0];
     
     // console.log(episodes.filter((episode) => episode.number === parseInt(searchParams.ep)));
     
@@ -39,7 +40,7 @@ export default async function WatchAnime({ params, searchParams} : WatchProp_Int
     return (
         <div>
 
-            <AnimePlayer episodeInfo={episode_data} cover_image={anime_data.cover} />
+            <AnimePlayer episodeInfo={episode_data} />
         </div>
     )
 }

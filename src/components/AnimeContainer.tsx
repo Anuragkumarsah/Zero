@@ -5,12 +5,13 @@ import AnimeCard from "./AnimeCard"
 
 import styles from './AnimeContainer.module.css'
 import { AnimeData, PopularAnimeData, RecentAnime } from "@/@types/AniList"
+import { IEpisodeData, IRecentEpisodes } from "@/@types/PinkishHue"
 
 
 type IAnimeContainer = {
     container_title: string,
-    recentAnime: AnimeData[] | null,
-    popularAnime: PopularAnimeData[] | null
+    recentAnime: IEpisodeData[] | null,
+    popularAnime: IEpisodeData[] | null
 }
 
 export default function AnimeContainer({ container_title, recentAnime, popularAnime }: IAnimeContainer) {
@@ -21,11 +22,11 @@ export default function AnimeContainer({ container_title, recentAnime, popularAn
             <h2 className={styles.container_title}>{container_title}</h2>
             </section>
             <div className={styles.card_container}>
-                {recentAnime !==null && recentAnime?.map((anime : AnimeData, id: any) => (
-                    <AnimeCard key={id} anime_id={anime.id} format={anime.type} anime_title={anime.title.english || anime.title.romaji} image_url={anime.image} info={`EP: ${anime.episodeNumber}`} episode={anime.episodeNumber} episode_title={anime.episodeTitle}/>
+                {recentAnime !==null && recentAnime?.map((anime : IEpisodeData, id: any) => (
+                    <AnimeCard key={id} anime_id={anime.id} format={anime.type} anime_title={anime.title || anime.alternateTitle} image_url={anime.image} info={`EP: ${anime.episodeNumber}`} episode={anime.episodeNumber!} episode_title={''}/>
                 ))}
-                { popularAnime !== null && popularAnime?.map((anime : PopularAnimeData, id: any) => (
-                    <AnimeCard key={id} anime_id={anime.id} format={anime.type} anime_title={anime.title.english || anime.title.romaji} image_url={anime.image} info={`Total EP: ${anime.totalEpisodes}`} episode={anime.duration} episode_title={''} isPopular={true}/>
+                { popularAnime !== null && popularAnime?.map((anime : IEpisodeData, id: any) => (
+                    <AnimeCard key={id} anime_id={anime.id} format={anime.type} anime_title={anime.title || anime.alternateTitle} image_url={anime.image} info={`Total EP: ${anime.totalEpisodes}`} episode={anime.episodeDuration} episode_title={''} isPopular={true}/>
                 ))}
             </div>
         </div>

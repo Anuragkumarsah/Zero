@@ -10,25 +10,24 @@ import play_button from "@/assets/images/play_button.svg";
 import Artplayer from "@/components/ArtPlayer";
 
 import styles from "./AnimePlayer.module.css";
+import { IEpisode, IEpisodeSources } from "@/@types/PinkishHue";
 
 type AnimePlayer_Interface = {
-  episodeInfo: Episode;
-  cover_image: string;
+  episodeInfo: IEpisode;
+  cover_image?: string | null;
 };
 
-const AnimePlayer = ({ episodeInfo, cover_image }: AnimePlayer_Interface) => {
+const AnimePlayer = ({ episodeInfo, cover_image = null }: AnimePlayer_Interface) => {
 
   // console.log(episodeInfo, animeInfo);
   
   const [episode_sources, setEpisode_sources] =
-    useState<EpisodeInfo_Interface | null>(null);
+    useState<IEpisodeSources | null>(null);
   const [url, setUrl] = useState<string>('');
   const { getEpisode } = useAnime();
-
-
-  const fetchEpisode = useCallback(async () =>{
+  
+  const fetchEpisode = async () =>{
     if(!episodeInfo) return;
-    // console.log(episodeInfo.sources);
     
     const source = episodeInfo.id;
     // console.log(source);
@@ -37,14 +36,16 @@ const AnimePlayer = ({ episodeInfo, cover_image }: AnimePlayer_Interface) => {
       console.log("Episode not found");
 
       return;
-    };;
+    };
     const data = await getEpisode(source);
     setEpisode_sources(data);
     
     data?.sources && setUrl(data.sources[0].url);
-  },[episodeInfo, getEpisode])
+  }
   
-
+  console.log(episode_sources?.subTitles.find((sub) => sub.lang === "English")?.url);
+  
+  
   const configs = {
     container: ".artplayer-app",
     url: url,
@@ -59,7 +60,7 @@ const AnimePlayer = ({ episodeInfo, cover_image }: AnimePlayer_Interface) => {
         }
     },
     title: episodeInfo.title ?? "",
-    poster: episodeInfo?.image ?? "",
+    poster: episodeInfo? "" : "",
     volume: 1.0,
     isLive: false,
     muted: false,
@@ -93,13 +94,12 @@ const AnimePlayer = ({ episodeInfo, cover_image }: AnimePlayer_Interface) => {
         html: source.quality,
         url: source.url,
     })) : [],
-    thumbnails: {
-        url: typeof episode_sources?.subtitles !== "undefined" ? episode_sources?.subtitles.find((sub) => "English")?.url : "",
+    subtitle: {
+        url: episode_sources?.subTitles.find((sub) => sub.lang === "English")?.url,
         type: "vtt",
         style: {
-            color: "#fff",
+            color: "#ed9e5a",
         },
-        encoding: "utf-8",
     },
     icons: {
         loading: `<img height="100" width="100" style="border-radius:50%;" src="${loading.src}" />`,
